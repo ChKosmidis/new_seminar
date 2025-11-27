@@ -1,0 +1,176 @@
+.section {
+  padding: clamp(4.5rem, 7vw, 5.5rem) 0;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 1.75rem);
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 3.2rem);
+}
+
+.header {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 760px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(234, 179, 8, 0.15);
+  color: rgba(161, 98, 7, 0.88);
+  font-weight: 600;
+}
+
+:global(body[data-theme='dark']) .badge {
+  background: rgba(250, 204, 21, 0.22);
+  color: rgba(253, 224, 71, 0.95);
+}
+
+.lead {
+  color: rgba(71, 85, 105, 0.78);
+}
+
+:global(body[data-theme='dark']) .lead {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(234, 179, 8, 0.28);
+  box-shadow: 0 28px 54px rgba(15, 23, 42, 0.12);
+  padding: clamp(1.8rem, 3vw, 2.4rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(234, 179, 8, 0.18);
+}
+
+.iconWrapper img {
+  width: 26px;
+  height: 26px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.6rem;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: rgba(107, 114, 128, 0.85);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: rgba(37, 99, 235, 0.9);
+  font-weight: 600;
+}
+
+.summary {
+  color: rgba(51, 65, 85, 0.85);
+  line-height: 1.65;
+}
+
+.highlights {
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(234, 179, 8, 0.4);
+  padding: 1.1rem 1.25rem;
+  background: rgba(253, 230, 138, 0.18);
+  line-height: 1.6;
+  color: rgba(113, 63, 18, 0.9);
+}
+
+.highlights ul {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.link {
+  justify-self: start;
+  font-weight: 600;
+  color: rgba(37, 99, 235, 0.9);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: rgba(107, 114, 128, 0.85);
+}
+
+.footnote {
+  border-top: 1px solid rgba(234, 179, 8, 0.35);
+  padding-top: 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(82, 82, 82, 0.85);
+}
+
+:global(body[data-theme='dark']) .card {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(234, 179, 8, 0.38);
+  box-shadow: 0 32px 64px rgba(2, 6, 23, 0.62);
+  color: var(--color-text-primary-dark);
+}
+
+:global(body[data-theme='dark']) .meta {
+  color: rgba(203, 213, 225, 0.75);
+}
+
+:global(body[data-theme='dark']) .tag {
+  background: rgba(59, 130, 246, 0.2);
+  color: rgba(191, 219, 254, 0.95);
+}
+
+:global(body[data-theme='dark']) .summary {
+  color: rgba(226, 232, 240, 0.88);
+}
+
+:global(body[data-theme='dark']) .highlights {
+  background: rgba(234, 179, 8, 0.22);
+  border-color: rgba(250, 204, 21, 0.5);
+  color: rgba(254, 240, 138, 0.96);
+}
+
+:global(body[data-theme='dark']) .link {
+  color: rgba(191, 219, 254, 0.95);
+}
+
+:global(body[data-theme='dark']) .note,
+:global(body[data-theme='dark']) .footnote {
+  color: rgba(203, 213, 225, 0.78);
+}

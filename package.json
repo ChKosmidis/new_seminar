@@ -1,0 +1,12 @@
+{
+  "name": "new-seminar",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "setup": "npm --prefix app install",
+    "dev": "npm --prefix app run dev",
+    "build": "npm --prefix app run build",
+    "check:conflicts": "npm --prefix app run check:conflicts",
+    "preview": "npm --prefix app run preview"
+  }
+}

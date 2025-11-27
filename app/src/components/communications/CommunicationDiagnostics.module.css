@@ -1,0 +1,246 @@
+.section {
+  padding: 5rem 1.5rem;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 60ch;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.16), rgba(244, 114, 182, 0.26));
+  color: #be185d;
+}
+
+[data-theme='dark'] .badge {
+  color: #fce7f3;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border-radius: 1.4rem;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-soft-light);
+  border: 1px solid rgba(236, 72, 153, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .card {
+  box-shadow: var(--shadow-soft-dark);
+  border-color: rgba(236, 72, 153, 0.32);
+}
+
+.cardOpen {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated-light);
+}
+
+[data-theme='dark'] .cardOpen {
+  box-shadow: var(--shadow-elevated-dark);
+}
+
+.cardButton {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 1.6rem 1.6rem 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  color: inherit;
+}
+
+.cardButton:focus-visible {
+  outline: 2px solid rgba(236, 72, 153, 0.6);
+  outline-offset: 4px;
+}
+
+.cardFront h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.cardFront p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.toggleIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(236, 72, 153, 0.24);
+  background: rgba(236, 72, 153, 0.08);
+  color: rgba(190, 24, 93, 0.85);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggleIcon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.toggleIcon[data-open='true'] {
+  transform: rotate(180deg);
+  background: rgba(236, 72, 153, 0.14);
+  border-color: rgba(236, 72, 153, 0.32);
+}
+
+:global(body[data-theme='dark']) .toggleIcon {
+  background: rgba(219, 39, 119, 0.24);
+  border-color: rgba(236, 72, 153, 0.36);
+  color: #fbcfe8;
+}
+
+:global(body[data-theme='dark']) .toggleIcon[data-open='true'] {
+  background: rgba(236, 72, 153, 0.32);
+  border-color: rgba(236, 72, 153, 0.45);
+}
+
+.cardBack {
+  padding: 0 1.6rem 1.6rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.cardBack[data-open='true'] {
+  max-height: 360px;
+  opacity: 1;
+}
+
+.cardBack h4 {
+  margin: 0 0 0.6rem;
+  color: rgba(190, 24, 93, 0.9);
+  font-size: 1.05rem;
+}
+
+.cardBack ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--color-text-secondary);
+}
+
+.cardBack li {
+  line-height: 1.6;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.feedbackHeader h3 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.feedbackHeader p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+.feedbackGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.feedbackCard {
+  border-radius: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  background: linear-gradient(135deg, rgba(219, 234, 254, 0.6), rgba(233, 213, 255, 0.75));
+  box-shadow: 0 18px 40px rgba(79, 70, 229, 0.18);
+  color: #1e1b4b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+[data-theme='dark'] .feedbackCard {
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.24), rgba(192, 132, 252, 0.32));
+  box-shadow: 0 22px 50px rgba(99, 102, 241, 0.28);
+}
+
+.feedbackCard h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.feedbackCard p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardButton {
+    padding: 1.3rem 1.3rem 0;
+  }
+
+  .cardBack {
+    padding: 0 1.3rem 1.3rem;
+  }
+}

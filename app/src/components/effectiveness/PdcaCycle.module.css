@@ -1,0 +1,123 @@
+.section {
+  padding: 4.5rem 1.5rem 5.5rem;
+  background: linear-gradient(180deg, rgba(253, 193, 7, 0.08), transparent 60%);
+}
+
+:global(body[data-theme='dark']) .section {
+  background: linear-gradient(180deg, rgba(253, 193, 7, 0.16), transparent 60%);
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.4rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  max-width: 720px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(253, 193, 7, 0.18);
+  color: #b45309;
+}
+
+:global(body[data-theme='dark']) .badge {
+  color: #fde68a;
+}
+
+.lead {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.steps {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.step {
+  background: var(--surface-base);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-soft-light);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+:global(body[data-theme='dark']) .step {
+  box-shadow: var(--shadow-soft-dark);
+}
+
+.step[data-open='true'] {
+  transform: translateY(-4px);
+  border-color: rgba(253, 193, 7, 0.35);
+}
+
+.icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  background: rgba(253, 193, 7, 0.18);
+  display: grid;
+  place-items: center;
+}
+
+.icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.titleRow h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.summary {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.details {
+  display: grid;
+  gap: 0.6rem;
+  color: var(--color-text-primary);
+}
+
+.details p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.example {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--color-text-secondary) 85%, transparent);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.8rem 1rem 4.5rem;
+  }
+}

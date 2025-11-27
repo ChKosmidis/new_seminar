@@ -1,0 +1,110 @@
+.section {
+  padding: clamp(4rem, 6vw, 5rem) 0;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 1.75rem);
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 3.4rem);
+}
+
+.header {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 640px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.12);
+  color: rgba(6, 95, 70, 0.82);
+  font-weight: 600;
+}
+
+:global(body[data-theme='dark']) .badge {
+  background: rgba(45, 212, 191, 0.18);
+  color: rgba(167, 243, 208, 0.95);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.3rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.6rem, 3vw, 2rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(16, 185, 129, 0.24);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 22px 44px rgba(16, 185, 129, 0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 28px 56px rgba(16, 185, 129, 0.22);
+}
+
+:global(body[data-theme='dark']) .card {
+  background: rgba(15, 23, 42, 0.92);
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 30px 60px rgba(2, 44, 34, 0.6);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconWrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.iconWrapper img {
+  width: 26px;
+  height: 26px;
+}
+
+:global(body[data-theme='dark']) .iconWrapper {
+  background: rgba(34, 197, 94, 0.22);
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+  color: rgba(45, 55, 72, 0.82);
+  line-height: 1.6;
+}
+
+:global(body[data-theme='dark']) .card ul {
+  color: rgba(226, 232, 240, 0.88);
+}
+
+.card li strong {
+  color: rgba(6, 95, 70, 0.95);
+}
+
+:global(body[data-theme='dark']) .card li strong {
+  color: rgba(167, 243, 208, 0.95);
+}

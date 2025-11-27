@@ -1,0 +1,327 @@
+.section {
+  --accent-color: var(--color-accent-light);
+  padding: 5rem 1.5rem 6rem;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.06), transparent 55%);
+}
+
+:global(body[data-theme='dark']) .section {
+  --accent-color: var(--color-accent-dark);
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.1), transparent 55%);
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  max-width: 720px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+:global(body[data-theme='dark']) .badge {
+  color: #bfdbfe;
+}
+
+.lead {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.helper {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-text-secondary) 85%, transparent);
+}
+
+.categories {
+  display: grid;
+  gap: 2rem;
+}
+
+.category {
+  background: var(--surface-base);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.9rem;
+  box-shadow: var(--shadow-soft-light);
+  display: grid;
+  gap: 1.4rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+:global(body[data-theme='dark']) .category {
+  box-shadow: var(--shadow-soft-dark);
+}
+
+.category:hover {
+  transform: translateY(-4px);
+}
+
+.categoryHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: rgba(37, 99, 235, 0.12);
+  display: grid;
+  place-items: center;
+}
+
+.iconWrapper img {
+  width: 36px;
+  height: 36px;
+}
+
+.categoryHeader h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.categoryHeader p {
+  margin: 0.3rem 0 0;
+  color: var(--color-text-secondary);
+}
+
+.itemsGrid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  background: var(--surface-raised);
+  color: var(--color-text-primary);
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(37, 99, 235, 0.18);
+}
+
+.item:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.item[data-selected] {
+  border-color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 14%, var(--surface-raised));
+  box-shadow: 0 20px 44px rgba(37, 99, 235, 0.24);
+}
+
+.checkmark {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--accent-color);
+}
+
+.checkmark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.checkmark circle {
+  stroke-opacity: 0.35;
+}
+
+.checkmark path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.item[data-selected] .checkmark path {
+  stroke-dashoffset: 0;
+}
+
+.itemLabel {
+  flex: 1;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.actionButton {
+  padding: 0.85rem 2.8rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.94), rgba(59, 130, 246, 0.94));
+  box-shadow: 0 24px 48px rgba(37, 99, 235, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 52px rgba(37, 99, 235, 0.32);
+}
+
+.actionButton:active {
+  transform: translateY(-1px);
+}
+
+.result {
+  background: var(--surface-base);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  padding: 2rem 2.2rem;
+  display: grid;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+:global(body[data-theme='dark']) .result {
+  box-shadow: var(--shadow-soft-dark);
+}
+
+.resultHeader h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.placeholder {
+  margin: 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.summary {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.summaryScore {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.summaryComment {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.progress {
+  display: grid;
+  gap: 1rem;
+}
+
+.progress h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.progressList {
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.progressItem {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.progressLabel {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.progressTrack {
+  position: relative;
+  height: 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 70%, #ffffff 30%));
+  transition: width 0.6s ease;
+}
+
+.progressValue {
+  position: relative;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent-color) 70%, var(--color-text-primary) 30%);
+  padding-left: 0.75rem;
+}
+
+@media (max-width: 960px) {
+  .category {
+    padding: 1.6rem;
+  }
+
+  .itemsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .itemsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actionButton {
+    width: 100%;
+  }
+}

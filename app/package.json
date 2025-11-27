@@ -1,0 +1,28 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/preflight.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/preflight.mjs",
+    "build": "tsc && vite build",
+    "check:conflicts": "node scripts/check-conflicts.mjs",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.3",
+    "new-seminar": "file:..",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^6.30.1"
+  }
+}

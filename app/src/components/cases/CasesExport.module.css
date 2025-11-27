@@ -1,0 +1,76 @@
+.section {
+  padding: clamp(4.5rem, 6vw, 6rem) 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(191, 219, 254, 0.12));
+}
+
+:global(body[data-theme='dark']) .section {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(49, 46, 129, 0.45));
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 1.75rem);
+  display: grid;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  color: rgba(30, 41, 59, 0.92);
+}
+
+:global(body[data-theme='dark']) .title {
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.description {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  color: rgba(55, 65, 81, 0.78);
+}
+
+:global(body[data-theme='dark']) .description {
+  color: rgba(203, 213, 225, 0.85);
+}
+
+.actions {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+}
+
+.button {
+  padding: 0.85rem 1.8rem;
+  border: none;
+  border-radius: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(124, 58, 237, 0.95));
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.25);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 44px rgba(59, 130, 246, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.75;
+  cursor: progress;
+  transform: none;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(30, 64, 175, 0.85);
+}
+
+:global(body[data-theme='dark']) .status {
+  color: rgba(165, 180, 252, 0.9);
+}

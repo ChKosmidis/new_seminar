@@ -1,0 +1,215 @@
+.section {
+  padding: clamp(4rem, 6vw, 5.5rem) 0;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 1.75rem);
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.header {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 760px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(34, 197, 94, 0.12);
+  color: rgba(22, 163, 74, 0.85);
+  font-weight: 600;
+}
+
+:global(body[data-theme='dark']) .badge {
+  background: rgba(74, 222, 128, 0.18);
+  color: rgba(187, 247, 208, 0.95);
+}
+
+.lead {
+  color: rgba(71, 85, 105, 0.78);
+}
+
+:global(body[data-theme='dark']) .lead {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.highlight {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.08));
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  font-weight: 600;
+  color: rgba(22, 101, 52, 0.85);
+}
+
+:global(body[data-theme='dark']) .highlight {
+  background: linear-gradient(120deg, rgba(34, 197, 94, 0.18), rgba(59, 130, 246, 0.16));
+  border-color: rgba(134, 239, 172, 0.35);
+  color: rgba(187, 247, 208, 0.9);
+}
+
+.layout {
+  display: grid;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.steps {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.08);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 36px rgba(15, 23, 42, 0.14);
+}
+
+.step:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 3px;
+}
+
+.stepIndex {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: rgba(59, 130, 246, 0.9);
+}
+
+.stepBody {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.stepTitle {
+  font-weight: 600;
+}
+
+.stepHint {
+  color: rgba(71, 85, 105, 0.75);
+  font-size: 0.95rem;
+}
+
+.active {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 24px 44px rgba(37, 99, 235, 0.22);
+  transform: translateY(-2px);
+}
+
+:global(body[data-theme='dark']) .step {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.22);
+  box-shadow: 0 28px 48px rgba(2, 6, 23, 0.55);
+  color: var(--color-text-primary-dark);
+}
+
+:global(body[data-theme='dark']) .stepHint {
+  color: rgba(226, 232, 240, 0.75);
+}
+
+:global(body[data-theme='dark']) .active {
+  border-color: rgba(148, 197, 255, 0.45);
+  box-shadow: 0 32px 56px rgba(37, 99, 235, 0.4);
+}
+
+.panel {
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(248, 250, 252, 0.92);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+  padding: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+.panelInner {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.panelHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.panelHeader p {
+  color: rgba(51, 65, 85, 0.82);
+}
+
+.panelIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.panelIcon img {
+  width: 28px;
+  height: 28px;
+}
+
+.panelActions h4 {
+  margin-bottom: 0.6rem;
+  color: rgba(22, 101, 52, 0.88);
+}
+
+.panelActions ul {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: rgba(30, 64, 175, 0.9);
+}
+
+:global(body[data-theme='dark']) .panel {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(59, 130, 246, 0.32);
+  box-shadow: 0 36px 68px rgba(2, 6, 23, 0.62);
+}
+
+:global(body[data-theme='dark']) .panelHeader p {
+  color: rgba(226, 232, 240, 0.85);
+}
+
+:global(body[data-theme='dark']) .panelIcon {
+  background: rgba(96, 165, 250, 0.22);
+}
+
+:global(body[data-theme='dark']) .panelActions h4 {
+  color: rgba(134, 239, 172, 0.9);
+}
+
+:global(body[data-theme='dark']) .panelActions ul {
+  color: rgba(191, 219, 254, 0.92);
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
