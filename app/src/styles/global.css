@@ -30,10 +30,10 @@ body {
 }
 
 body[data-theme='dark'] {
-    background: var(--color-bg-dark);
+    background: #0A0A0A;
     color: var(--color-text-primary);
-    --surface-base: rgba(15, 23, 42, 0.82);
-    --surface-raised: var(--color-surface-dark);
+    --surface-base: #0A0A0A;
+    --surface-raised: #111111;
     --color-text-primary: var(--color-text-primary-dark);
     --color-text-secondary: var(--color-text-secondary-dark);
 }
