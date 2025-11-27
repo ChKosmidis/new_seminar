@@ -21,7 +21,7 @@ const HomePage = () => {
       <HomeHero data={homePage.hero} />
 
       {/* --- TICKER TAPE --- */}
-      <div className="w-full bg-ink dark:bg-ash text-paper dark:text-graphite py-3 overflow-hidden border-y-2 border-orange">
+      <div className="w-full bg-ink dark:bg-ash text-paper dark:text-graphite py-4 my-12 overflow-hidden border-y-2 border-orange relative z-20">
         <div className="flex whitespace-nowrap animate-marquee">
            {[...Array(6)].map((_, i) => (
              <div key={i} className="flex items-center">
@@ -109,7 +109,7 @@ const HomePage = () => {
 
       {/* --- PROGRAM BLOCKS (Brutalist Lists) --- */}
       <section id="program" className="py-20 md:py-32 bg-paper dark:bg-graphite">
-         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32">
             <div className="lg:col-span-4 space-y-8">
                <motion.span
                   initial={{ opacity: 0 }}
@@ -292,7 +292,7 @@ const HomePage = () => {
                className="pt-10"
             >
                <a href={homePage.cta.button.href} className="inline-block">
-                  <button className="bg-white text-orange px-10 py-5 font-bold font-display text-xl hover:bg-black hover:text-white transition-colors duration-300 rounded-none shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                  <button className="bg-white text-ink px-10 py-5 font-bold font-mono text-lg uppercase hover:bg-ink hover:text-white transition-colors duration-300 rounded-none shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
                      {t(homePage.cta.button.labelKey)}
                   </button>
                </a>
