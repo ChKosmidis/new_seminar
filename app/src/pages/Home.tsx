@@ -152,7 +152,7 @@ const HomePage = () => {
       {/* --- AI FEEDBACK --- */}
       <motion.section
           id="ai-feedback"
-          className="py-20 md:py-24 bg-ink text-paper dark:bg-[#050505] dark:text-ash relative overflow-hidden"
+          className="py-20 md:py-24 bg-[#F2F2EE] dark:bg-[#0A0A0A] text-ink dark:text-white transition-colors relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -168,10 +168,10 @@ const HomePage = () => {
                <span className="font-mono text-orange uppercase tracking-widest text-sm block mb-4">
                   {t(homePage.feedback.eyebrowKey)}
                </span>
-               <h2 className="text-5xl md:text-6xl font-display font-bold mb-8 leading-[0.9] dark:text-neutral-200">
+               <h2 className="text-5xl md:text-6xl font-display font-bold mb-8 leading-[0.9] text-ink dark:text-neutral-200">
                   {t(homePage.feedback.titleKey)}
                </h2>
-               <p className="text-xl opacity-80 mb-12 max-w-lg font-light dark:text-neutral-400">
+               <p className="text-xl opacity-80 mb-12 max-w-lg font-light text-ink/80 dark:text-neutral-400">
                   {t(homePage.feedback.textKey)}
                </p>
 
@@ -184,8 +184,8 @@ const HomePage = () => {
                            {idx === 2 && <TrendingUp className="text-orange w-8 h-8" />}
                         </div>
                         <div>
-                           <h4 className="font-bold text-xl mb-2 font-display dark:text-neutral-200">{t(item.titleKey)}</h4>
-                           <p className="opacity-60 text-sm leading-relaxed max-w-md dark:text-neutral-400">{t(item.textKey)}</p>
+                           <h4 className="font-bold text-xl mb-2 font-display text-ink dark:text-neutral-200">{t(item.titleKey)}</h4>
+                           <p className="opacity-60 text-sm leading-relaxed max-w-md text-ink/60 dark:text-neutral-400">{t(item.textKey)}</p>
                         </div>
                      </div>
                   ))}
@@ -235,9 +235,9 @@ const HomePage = () => {
             <p className="text-xl md:text-2xl font-light opacity-90 max-w-2xl mx-auto">
                {t(homePage.cta.textKey)}
             </p>
-            <div className="pt-10">
+            <div className="mt-12">
                <a href={homePage.cta.button.href} className="inline-block">
-                  <button className="bg-white text-ink px-10 py-5 font-bold font-mono text-lg uppercase hover:bg-ink hover:text-white transition-colors duration-300 rounded-none shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                  <button className="bg-white text-black px-10 py-5 text-sm font-mono uppercase tracking-widest hover:bg-black hover:text-white transition-colors rounded-sm">
                      {t(homePage.cta.button.labelKey)}
                   </button>
                </a>

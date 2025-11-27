@@ -44,7 +44,7 @@ const HomeHero = ({ data }: HeroProps) => {
           </div>
 
           {/* Typography: Massive Headers (Swiss Style) - CENTERED */}
-          <div className="space-y-8 max-w-5xl mx-auto mb-12">
+          <div className="flex flex-col gap-y-12 max-w-5xl mx-auto mb-12">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight text-ink dark:text-neutral-200 break-words">
                {t(data.titleKey)}
             </h1>
