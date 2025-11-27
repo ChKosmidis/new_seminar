@@ -54,10 +54,20 @@
   display: grid;
   gap: 1.2rem;
   box-shadow: var(--shadow-soft-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
 :global(body[data-theme='dark']) .formCard {
   box-shadow: var(--shadow-soft-dark);
+}
+
+:global(body[data-theme='dark']) .formCard:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 .field {
@@ -73,8 +83,8 @@
 .input,
 .textarea {
   font: inherit;
-  padding: 0.7rem 0.85rem;
-  border-radius: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
   border: 1px solid color-mix(in srgb, var(--color-text-primary) 14%, transparent);
   background: var(--surface-raised);
   color: var(--color-text-primary);
@@ -84,8 +94,8 @@
 .select:focus,
 .input:focus,
 .textarea:focus {
-  border-color: rgba(253, 126, 20, 0.45);
-  box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.12);
+  border-color: rgba(253, 126, 20, 0.6);
+  box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.15);
   outline: none;
 }
 
@@ -141,10 +151,20 @@
   display: grid;
   gap: 0.9rem;
   box-shadow: var(--shadow-soft-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resultCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
 :global(body[data-theme='dark']) .resultCard {
   box-shadow: var(--shadow-soft-dark);
+}
+
+:global(body[data-theme='dark']) .resultCard:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 .resultCard h3 {

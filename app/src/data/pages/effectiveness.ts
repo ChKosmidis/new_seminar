@@ -33,30 +33,41 @@ type HeroContent = {
   card: HeroCard;
 };
 
-type WorksheetExample = {
+export type SmartIndicator = {
   id: string;
-  goalKey: TranslationKey;
-  kpiKey: TranslationKey;
-  measureKey: TranslationKey;
+  labelKey: TranslationKey;
 };
 
-type WorksheetArea = {
+export type SmartGoal = {
   id: string;
-  icon: string;
   titleKey: TranslationKey;
-  examples: ReadonlyArray<WorksheetExample>;
+  indicators: ReadonlyArray<SmartIndicator>;
+};
+
+export type SmartCategory = {
+  id: string;
+  titleKey: TranslationKey;
+  goals: ReadonlyArray<SmartGoal>;
 };
 
 type WorksheetContent = {
   badgeKey: TranslationKey;
   titleKey: TranslationKey;
   introKey: TranslationKey;
-  columns: {
-    goalKey: TranslationKey;
-    kpiKey: TranslationKey;
-    measureKey: TranslationKey;
+  categories: ReadonlyArray<SmartCategory>;
+  ui: {
+    categoryLabel: TranslationKey;
+    goalLabel: TranslationKey;
+    indicatorLabel: TranslationKey;
+    smartLabel: TranslationKey;
+    smart: {
+      specific: { label: TranslationKey; placeholder: TranslationKey };
+      measurable: { label: TranslationKey; placeholder: TranslationKey };
+      achievable: { label: TranslationKey; placeholder: TranslationKey };
+      relevant: { label: TranslationKey; placeholder: TranslationKey };
+      timebound: { label: TranslationKey; placeholder: TranslationKey };
+    };
   };
-  areas: ReadonlyArray<WorksheetArea>;
   ai: {
     buttonKey: TranslationKey;
     loadingKey: TranslationKey;
@@ -139,9 +150,16 @@ type ExportContent = {
 };
 
 export type WorksheetSelection = {
-  goalKey?: TranslationKey;
-  kpiKey?: TranslationKey;
-  measureKey?: TranslationKey;
+  categoryId?: string;
+  goalId?: string;
+  indicatorId?: string;
+  smart?: {
+    s: string;
+    m: string;
+    a: string;
+    r: string;
+    t: string;
+  };
   aiFeedback?: string;
   aiNotice?: string | null;
 };
@@ -216,110 +234,133 @@ export const effectivenessPage: EffectivenessPageContent = {
     badgeKey: 'effectiveness.kpi.badge' as TranslationKey,
     titleKey: 'effectiveness.kpi.title' as TranslationKey,
     introKey: 'effectiveness.kpi.intro' as TranslationKey,
-    columns: {
-      goalKey: 'effectiveness.kpi.column.goal' as TranslationKey,
-      kpiKey: 'effectiveness.kpi.column.kpi' as TranslationKey,
-      measureKey: 'effectiveness.kpi.column.measure' as TranslationKey
+    ui: {
+      categoryLabel: 'effectiveness.kpi.builder.category' as TranslationKey,
+      goalLabel: 'effectiveness.kpi.builder.goal' as TranslationKey,
+      indicatorLabel: 'effectiveness.kpi.builder.indicator' as TranslationKey,
+      smartLabel: 'effectiveness.kpi.builder.smart' as TranslationKey,
+      smart: {
+        specific: { label: 'effectiveness.kpi.smart.specific.label' as TranslationKey, placeholder: 'effectiveness.kpi.smart.specific.placeholder' as TranslationKey },
+        measurable: { label: 'effectiveness.kpi.smart.measurable.label' as TranslationKey, placeholder: 'effectiveness.kpi.smart.measurable.placeholder' as TranslationKey },
+        achievable: { label: 'effectiveness.kpi.smart.achievable.label' as TranslationKey, placeholder: 'effectiveness.kpi.smart.achievable.placeholder' as TranslationKey },
+        relevant: { label: 'effectiveness.kpi.smart.relevant.label' as TranslationKey, placeholder: 'effectiveness.kpi.smart.relevant.placeholder' as TranslationKey },
+        timebound: { label: 'effectiveness.kpi.smart.timebound.label' as TranslationKey, placeholder: 'effectiveness.kpi.smart.timebound.placeholder' as TranslationKey }
+      }
     },
-    areas: [
+    categories: [
       {
-        id: 'community',
-        icon: 'community.svg',
-        titleKey: 'effectiveness.kpi.areas.community.title' as TranslationKey,
-        examples: [
+        id: 'fundraising',
+        titleKey: 'effectiveness.kpi.categories.fundraising.title' as TranslationKey,
+        goals: [
           {
-            id: 'community-growth',
-            goalKey: 'effectiveness.kpi.areas.community.examples.0.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.community.examples.0.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.community.examples.0.measure' as TranslationKey
+            id: 'grants',
+            titleKey: 'effectiveness.kpi.categories.fundraising.goals.grants.title' as TranslationKey,
+            indicators: [
+              { id: 'win_rate', labelKey: 'effectiveness.kpi.categories.fundraising.goals.grants.kpi.win_rate' as TranslationKey },
+              { id: 'volume', labelKey: 'effectiveness.kpi.categories.fundraising.goals.grants.kpi.volume' as TranslationKey }
+            ]
           },
           {
-            id: 'community-engagement',
-            goalKey: 'effectiveness.kpi.areas.community.examples.1.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.community.examples.1.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.community.examples.1.measure' as TranslationKey
+            id: 'individual',
+            titleKey: 'effectiveness.kpi.categories.fundraising.goals.individual.title' as TranslationKey,
+            indicators: [
+              { id: 'recurring', labelKey: 'effectiveness.kpi.categories.fundraising.goals.individual.kpi.recurring' as TranslationKey },
+              { id: 'avg_donation', labelKey: 'effectiveness.kpi.categories.fundraising.goals.individual.kpi.avg_donation' as TranslationKey }
+            ]
           },
           {
-            id: 'community-volunteers',
-            goalKey: 'effectiveness.kpi.areas.community.examples.2.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.community.examples.2.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.community.examples.2.measure' as TranslationKey
+            id: 'diversify',
+            titleKey: 'effectiveness.kpi.categories.fundraising.goals.diversify.title' as TranslationKey,
+            indicators: [
+               { id: 'sources_count', labelKey: 'effectiveness.kpi.categories.fundraising.goals.diversify.kpi.sources' as TranslationKey },
+               { id: 'resilience', labelKey: 'effectiveness.kpi.categories.fundraising.goals.diversify.kpi.resilience' as TranslationKey }
+            ]
           }
         ]
       },
       {
         id: 'communications',
-        icon: 'communication.svg',
-        titleKey: 'effectiveness.kpi.areas.communications.title' as TranslationKey,
-        examples: [
+        titleKey: 'effectiveness.kpi.categories.communications.title' as TranslationKey,
+        goals: [
           {
-            id: 'communications-awareness',
-            goalKey: 'effectiveness.kpi.areas.communications.examples.0.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.communications.examples.0.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.communications.examples.0.measure' as TranslationKey
+            id: 'social',
+            titleKey: 'effectiveness.kpi.categories.communications.goals.social.title' as TranslationKey,
+            indicators: [
+              { id: 'engagement', labelKey: 'effectiveness.kpi.categories.communications.goals.social.kpi.engagement' as TranslationKey },
+              { id: 'reach', labelKey: 'effectiveness.kpi.categories.communications.goals.social.kpi.reach' as TranslationKey }
+            ]
           },
           {
-            id: 'communications-meetings',
-            goalKey: 'effectiveness.kpi.areas.communications.examples.1.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.communications.examples.1.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.communications.examples.1.measure' as TranslationKey
+            id: 'pr',
+            titleKey: 'effectiveness.kpi.categories.communications.goals.pr.title' as TranslationKey,
+            indicators: [
+              { id: 'mentions', labelKey: 'effectiveness.kpi.categories.communications.goals.pr.kpi.mentions' as TranslationKey },
+              { id: 'sentiment', labelKey: 'effectiveness.kpi.categories.communications.goals.pr.kpi.sentiment' as TranslationKey }
+            ]
           }
         ]
       },
       {
-        id: 'infrastructure',
-        icon: 'Infrastructure.svg',
-        titleKey: 'effectiveness.kpi.areas.infrastructure.title' as TranslationKey,
-        examples: [
+        id: 'team',
+        titleKey: 'effectiveness.kpi.categories.team.title' as TranslationKey,
+        goals: [
           {
-            id: 'infrastructure-uptime',
-            goalKey: 'effectiveness.kpi.areas.infrastructure.examples.0.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.infrastructure.examples.0.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.infrastructure.examples.0.measure' as TranslationKey
-          },
-          {
-            id: 'infrastructure-crm',
-            goalKey: 'effectiveness.kpi.areas.infrastructure.examples.1.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.infrastructure.examples.1.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.infrastructure.examples.1.measure' as TranslationKey
+            id: 'retention',
+            titleKey: 'effectiveness.kpi.categories.team.goals.retention.title' as TranslationKey,
+            indicators: [
+              { id: 'turnover', labelKey: 'effectiveness.kpi.categories.team.goals.retention.kpi.turnover' as TranslationKey },
+              { id: 'satisfaction', labelKey: 'effectiveness.kpi.categories.team.goals.retention.kpi.satisfaction' as TranslationKey }
+            ]
           }
         ]
       },
       {
-        id: 'security',
-        icon: 'safety.svg',
-        titleKey: 'effectiveness.kpi.areas.security.title' as TranslationKey,
-        examples: [
+        id: 'community',
+        titleKey: 'effectiveness.kpi.categories.community.title' as TranslationKey,
+        goals: [
           {
-            id: 'security-literacy',
-            goalKey: 'effectiveness.kpi.areas.security.examples.0.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.security.examples.0.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.security.examples.0.measure' as TranslationKey
-          },
-          {
-            id: 'security-backups',
-            goalKey: 'effectiveness.kpi.areas.security.examples.1.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.security.examples.1.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.security.examples.1.measure' as TranslationKey
+            id: 'engagement',
+            titleKey: 'effectiveness.kpi.categories.community.goals.engagement.title' as TranslationKey,
+            indicators: [
+              { id: 'active_members', labelKey: 'effectiveness.kpi.categories.community.goals.engagement.kpi.active' as TranslationKey },
+              { id: 'trust', labelKey: 'effectiveness.kpi.categories.community.goals.engagement.kpi.trust' as TranslationKey },
+              { id: 'volunteer_hours', labelKey: 'effectiveness.kpi.categories.community.goals.engagement.kpi.hours' as TranslationKey }
+            ]
           }
+        ]
+      },
+      {
+        id: 'operations',
+        titleKey: 'effectiveness.kpi.categories.operations.title' as TranslationKey,
+        goals: [
+           {
+             id: 'efficiency',
+             titleKey: 'effectiveness.kpi.categories.operations.goals.efficiency.title' as TranslationKey,
+             indicators: [
+               { id: 'admin_cost', labelKey: 'effectiveness.kpi.categories.operations.goals.efficiency.kpi.admin' as TranslationKey },
+               { id: 'automation', labelKey: 'effectiveness.kpi.categories.operations.goals.efficiency.kpi.automation' as TranslationKey }
+             ]
+           }
         ]
       },
       {
         id: 'advocacy',
-        icon: 'rights.svg',
-        titleKey: 'effectiveness.kpi.areas.advocacy.title' as TranslationKey,
-        examples: [
+        titleKey: 'effectiveness.kpi.categories.advocacy.title' as TranslationKey,
+        goals: [
           {
-            id: 'advocacy-support',
-            goalKey: 'effectiveness.kpi.areas.advocacy.examples.0.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.advocacy.examples.0.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.advocacy.examples.0.measure' as TranslationKey
+            id: 'policy',
+            titleKey: 'effectiveness.kpi.categories.advocacy.goals.policy.title' as TranslationKey,
+            indicators: [
+              { id: 'impact_score', labelKey: 'effectiveness.kpi.categories.advocacy.goals.policy.kpi.impact' as TranslationKey },
+              { id: 'stakeholder_feedback', labelKey: 'effectiveness.kpi.categories.advocacy.goals.policy.kpi.feedback' as TranslationKey }
+            ]
           },
           {
-            id: 'advocacy-awareness',
-            goalKey: 'effectiveness.kpi.areas.advocacy.examples.1.goal' as TranslationKey,
-            kpiKey: 'effectiveness.kpi.areas.advocacy.examples.1.kpi' as TranslationKey,
-            measureKey: 'effectiveness.kpi.areas.advocacy.examples.1.measure' as TranslationKey
+            id: 'awareness',
+            titleKey: 'effectiveness.kpi.categories.advocacy.goals.awareness.title' as TranslationKey,
+            indicators: [
+              { id: 'petition_signatures', labelKey: 'effectiveness.kpi.categories.advocacy.goals.awareness.kpi.signatures' as TranslationKey }
+            ]
           }
         ]
       }

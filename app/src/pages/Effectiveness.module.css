@@ -1,5 +1,5 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 6rem; /* Increased from 0 to 6rem for better vertical rhythm */
 }

@@ -93,34 +93,38 @@ const EffectivenessExport = ({
         cursor.y = (last?.finalY ?? cursor.y) + 18;
       };
 
-      // Worksheet section
+      // Worksheet section (SMART Builder)
       addSectionTitle(t(exportContent.pdf.worksheetSectionKey));
-      worksheet.areas.forEach((area) => {
-        const selection = selections[area.id];
-        if (!selection || !selection.goalKey || !selection.kpiKey || !selection.measureKey) {
-          return;
-        }
+      
+      worksheet.categories.forEach((cat) => {
+        const selection = selections[cat.id];
+        if (!selection || !selection.smart) return;
 
+        ensureSpace(doc, cursor, 40);
         doc.setFontSize(12);
-        doc.text(t(area.titleKey), 60, cursor.y);
-        cursor.y += 18;
+        doc.setTextColor(0, 0, 0);
+        doc.text(`${t(cat.titleKey)}`, 60, cursor.y);
+        cursor.y += 16;
 
         addTable([
-          [t(worksheet.columns.goalKey), t(selection.goalKey)],
-          [t(worksheet.columns.kpiKey), t(selection.kpiKey)],
-          [t(worksheet.columns.measureKey), t(selection.measureKey)]
+            ['Specific', selection.smart.s],
+            ['Measurable', selection.smart.m],
+            ['Achievable', selection.smart.a],
+            ['Relevant', selection.smart.r],
+            ['Time-bound', selection.smart.t]
         ]);
 
         if (selection.aiFeedback) {
-          doc.setFontSize(11);
-          doc.text(t(exportContent.pdf.aiWorksheetTitleKey), 60, cursor.y);
-          cursor.y += 14;
-          addParagraph(selection.aiFeedback);
-          if (selection.aiNotice) {
-            addNotice(selection.aiNotice);
-          }
+           doc.setFontSize(11);
+           doc.text(t(exportContent.pdf.aiWorksheetTitleKey), 60, cursor.y);
+           cursor.y += 14;
+           addParagraph(selection.aiFeedback);
+           if (selection.aiNotice) {
+             addNotice(selection.aiNotice);
+           }
         }
       });
+
 
       // PDCA section
       addSectionTitle(t(exportContent.pdf.pdcaSectionKey));
