@@ -8,7 +8,8 @@
     "dev": "npm --prefix app run dev",
     "build": "npm --prefix app run build",
     "check:conflicts": "npm --prefix app run check:conflicts",
-    "preview": "npm --prefix app run preview"
+    "preview": "npm --prefix app run preview",
+    "prepare": "npm run setup"
   }
   ,
   "engines": {
