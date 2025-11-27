@@ -23,6 +23,12 @@ export const homePage = {
       labelKey: "home.hero.floating.label" as TranslationKey
     }
   },
+  ticker: [
+    "home.ticker.item1" as TranslationKey,
+    "home.ticker.item2" as TranslationKey,
+    "home.ticker.item3" as TranslationKey,
+    "home.ticker.item4" as TranslationKey
+  ],
   stats: [
     { valueKey: "home.stats.stat1.value" as TranslationKey, labelKey: "home.stats.stat1.label" as TranslationKey },
     { valueKey: "home.stats.stat2.value" as TranslationKey, labelKey: "home.stats.stat2.label" as TranslationKey },

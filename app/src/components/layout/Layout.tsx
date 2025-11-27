@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 import Header from './Header';
 import SectionsStrip from './SectionsStrip';
-import styles from './Layout.module.css';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 
 type LayoutProps = {
   children: ReactNode;
@@ -9,11 +11,32 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, withSectionsStrip = false }: LayoutProps) => {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
-    <div className={styles.wrapper}>
+    <div className="min-h-screen bg-paper dark:bg-graphite text-ink dark:text-ash transition-colors duration-300">
       <Header />
       {withSectionsStrip ? <SectionsStrip /> : null}
-      <main className={styles.main}>{children}</main>
+      <main className="relative z-10">{children}</main>
     </div>
   );
 };

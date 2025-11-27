@@ -1,5 +1,9 @@
 @import './tokens.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --surface-base: var(--color-surface-strong-light);
     --surface-raised: var(--color-surface-light);
@@ -47,6 +51,27 @@ img {
 
 button {
     font-family: inherit;
+}
+
+/* Lenis Recommended Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 .intro-container {
