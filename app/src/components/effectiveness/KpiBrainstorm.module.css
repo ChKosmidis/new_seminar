@@ -13,6 +13,9 @@
   display: grid;
   gap: 1rem;
   max-width: 720px;
+  /* Safety: Start visible */
+  opacity: 1;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .badge {
@@ -54,12 +57,20 @@
   display: grid;
   gap: 1.2rem;
   box-shadow: var(--shadow-soft-light);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+  
+  /* Safety: Start visible */
+  opacity: 1;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+  will-change: transform, opacity;
 }
 
-.formCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+/* Hover effect only on devices that support hover */
+@media (hover: hover) {
+  .formCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 :global(body[data-theme='dark']) .formCard {
@@ -88,7 +99,8 @@
   border: 1px solid color-mix(in srgb, var(--color-text-primary) 14%, transparent);
   background: var(--surface-raised);
   color: var(--color-text-primary);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  min-height: 48px; /* Touch target 44px+ */
 }
 
 .select:focus,
@@ -96,12 +108,14 @@
 .textarea:focus {
   border-color: rgba(253, 126, 20, 0.6);
   box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.15);
+  background-color: var(--surface-base);
   outline: none;
 }
 
 .textarea {
   resize: vertical;
   min-height: 140px;
+  padding-top: 1rem;
 }
 
 .actions {
@@ -112,6 +126,7 @@
 
 .primaryButton {
   padding: 0.75rem 1.4rem;
+  min-height: 48px; /* Touch target */
   border-radius: 0.85rem;
   border: none;
   cursor: pointer;
@@ -119,22 +134,39 @@
   background: linear-gradient(135deg, rgba(253, 126, 20, 0.9), rgba(253, 193, 7, 0.9));
   color: #fff;
   box-shadow: 0 18px 36px rgba(253, 126, 20, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.1s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryButton:active {
+  transform: scale(0.97);
 }
 
 .primaryButton:disabled {
   opacity: 0.55;
   cursor: not-allowed;
   box-shadow: none;
+  transform: none;
 }
 
 .secondaryButton {
   padding: 0.75rem 1.2rem;
+  min-height: 48px; /* Touch target */
   border-radius: 0.85rem;
   border: 1px solid color-mix(in srgb, var(--color-text-primary) 18%, transparent);
   background: transparent;
   color: var(--color-text-primary);
   cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryButton:active {
+  transform: scale(0.97);
 }
 
 .notice {
@@ -151,12 +183,19 @@
   display: grid;
   gap: 0.9rem;
   box-shadow: var(--shadow-soft-light);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+  
+  /* Safety: Start visible */
+  opacity: 1;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+  will-change: transform, opacity;
 }
 
-.resultCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+@media (hover: hover) {
+  .resultCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 :global(body[data-theme='dark']) .resultCard {
@@ -193,5 +232,9 @@
 @media (max-width: 768px) {
   .section {
     padding: 3.8rem 1rem 4.5rem;
+  }
+  
+  .formCard, .resultCard {
+    padding: 1.5rem;
   }
 }
