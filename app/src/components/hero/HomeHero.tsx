@@ -58,7 +58,7 @@ const Hero = ({ data }: HeroProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-7xl md:text-8xl lg:text-9xl font-display font-bold leading-[0.85] tracking-tight text-ink dark:text-neutral-200 uppercase break-words"
+                className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight text-ink dark:text-neutral-200 break-words"
             >
                {t(data.titleKey)}
             </motion.h1>
