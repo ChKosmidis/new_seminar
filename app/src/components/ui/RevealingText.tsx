@@ -19,7 +19,7 @@ const RevealingText = ({
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: delay * i },
+      transition: { staggerChildren: 0.08, delayChildren: delay * i }, // Faster stagger
     }),
   };
 
@@ -29,8 +29,9 @@ const RevealingText = ({
       opacity: 1,
       transition: {
         type: "spring",
-        damping: 12,
+        damping: 14,
         stiffness: 100,
+        mass: 0.5,
       },
     },
     hidden: {
@@ -46,11 +47,11 @@ const RevealingText = ({
             variants={container}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="flex flex-wrap gap-x-[0.25em]"
+            viewport={{ once: true, margin: "-10%" }}
+            className="flex flex-wrap gap-x-[0.2em] gap-y-1"
         >
             {words.map((word, index) => (
-            <span key={index} className="overflow-hidden inline-block relative">
+            <span key={index} className="overflow-hidden inline-block relative py-1 -my-1">
                  <motion.span variants={child} className="inline-block">
                     {word}
                  </motion.span>
