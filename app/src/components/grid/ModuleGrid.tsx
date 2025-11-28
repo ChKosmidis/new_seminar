@@ -23,25 +23,30 @@ export default function ModuleGrid() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="group relative h-[340px] border border-neutral-300 dark:border-neutral-800 bg-transparent hover:bg-[#111] hover:border-[#111] transition-all duration-300 p-8 flex flex-col justify-between"
+            className="group relative h-[300px] border border-neutral-800 bg-transparent hover:bg-[#FF4500] transition-colors duration-300 p-8 flex flex-col justify-between cursor-pointer"
           >
             {/* Top Content */}
             <div>
-              <span className="font-mono text-xs text-[#FF4500] mb-3 block">MOD {mod.id}</span>
-              <h3 className="text-2xl font-bold leading-none mb-4 group-hover:text-white transition-colors">
+              {/* Label turns White on hover */}
+              <span className="font-mono text-xs text-[#FF4500] group-hover:text-white mb-3 block transition-colors">
+                MOD {mod.id}
+              </span>
+              {/* Title turns White on hover */}
+              <h3 className="text-2xl font-bold leading-none mb-4 text-white transition-colors">
                 {mod.title}
               </h3>
-              <p className="text-sm text-neutral-500 group-hover:text-neutral-400 line-clamp-4 transition-colors">
+              {/* Description turns White opacity-90 */}
+              <p className="text-sm text-neutral-500 group-hover:text-white/90 line-clamp-3 transition-colors">
                 {mod.desc}
               </p>
             </div>
 
-            {/* Bottom Link (Pinned to bottom) */}
-            <div className="flex items-center justify-between pt-6 border-t border-transparent group-hover:border-neutral-800 transition-colors">
-              <span className="font-mono text-xs uppercase tracking-wider group-hover:text-white">
+            {/* Bottom Link */}
+            <div className="flex items-center justify-between pt-6 border-t border-neutral-800 group-hover:border-white/30 mt-auto transition-colors">
+              <span className="font-mono text-xs uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
                 Перейти к разделу
               </span>
-              <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-[#FF4500] transition-all" />
+              <ArrowUpRight className="w-4 h-4 text-[#FF4500] group-hover:text-white transition-colors" />
             </div>
           </motion.div>
         ))}
