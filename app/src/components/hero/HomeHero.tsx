@@ -2,27 +2,52 @@ import { motion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
-// Variants for text stagger
-const container: Variants = {
+// --- StaggeredText Component ---
+const letterContainer: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 }
-  }
-};
-
-const item: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  show: {
-    y: 0,
-    opacity: 1,
     transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as any // Cast to any to bypass strict type check for Bezier definition
+      staggerChildren: 0.03, // Fast stagger for letters
+      delayChildren: 0.2
     }
   }
 };
 
+const letterItem: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as any
+    }
+  }
+};
+
+const StaggeredText = ({ text, className = "" }: { text: string; className?: string }) => {
+  // Split by words first to handle line breaks if needed, but for strict "letter" animation
+  // we can split the whole string. We need to preserve spaces.
+  const letters = Array.from(text);
+
+  return (
+    <motion.span
+      variants={letterContainer}
+      initial="hidden"
+      animate="show"
+      className={`inline-block ${className}`}
+    >
+      {letters.map((char, i) => (
+        <motion.span key={i} variants={letterItem} className="inline-block whitespace-pre">
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+// --- Typewriter Effect ---
 const TypewriterEffect = ({ text, speed = 50 }: { text: string; speed?: number }) => {
   const [displayedText, setDisplayedText] = useState("");
 
@@ -42,9 +67,30 @@ const TypewriterEffect = ({ text, speed = 50 }: { text: string; speed?: number }
   return <span>{displayedText}</span>;
 };
 
+// --- Main Component ---
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+  }
+};
+
+const item: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1] as any
+    }
+  }
+};
+
 export default function HomeHero() {
   return (
-    <section className="relative pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[85vh] flex items-center">
+    <section id="hero" className="relative pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[85vh] flex items-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-start">
 
         {/* LEFT COLUMN: Typography (Span 8) */}
@@ -54,12 +100,12 @@ export default function HomeHero() {
           animate="show"
           className="lg:col-span-8 flex flex-col gap-8"
         >
-          <motion.h1
-            variants={item}
-            className="text-6xl md:text-8xl font-bold tracking-tight leading-[0.9] text-[#111] dark:text-white uppercase break-words"
-          >
-            Трёхчасовой<br />практикум по<br />управлению НКО
-          </motion.h1>
+          {/* Animated Header */}
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[0.9] text-[#111] dark:text-white uppercase break-words">
+            <div className="block"><StaggeredText text="Трёхчасовой" /></div>
+            <div className="block"><StaggeredText text="практикум по" /></div>
+            <div className="block"><StaggeredText text="управлению НКО" /></div>
+          </h1>
 
           <motion.p
             variants={item}

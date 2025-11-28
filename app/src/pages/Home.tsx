@@ -7,6 +7,7 @@ import HomeHero from '../components/hero/HomeHero';
 import ModuleGrid from '../components/grid/ModuleGrid';
 import AIFeedback from '../components/ai/AIFeedback';
 import CTA from '../components/home/CTA';
+import Footer from '../components/layout/Footer';
 
 // Icons
 import { CheckCircle2 } from 'lucide-react';
@@ -21,7 +22,6 @@ const HomePage = () => {
       <HomeHero />
 
       {/* --- TICKER TAPE --- */}
-      {/* ADDED: py-24 for large padding */}
       <div className="w-full bg-ink dark:bg-ash text-paper dark:text-graphite py-24 my-12 overflow-hidden border-y-2 border-orange relative z-20">
         <div className="flex whitespace-nowrap animate-marquee">
            {[...Array(6)].map((_, i) => (
@@ -37,7 +37,6 @@ const HomePage = () => {
       </div>
 
       {/* --- OVERVIEW & STATS --- */}
-      {/* REDESIGNED: Clean 2-column layout, Removed Grey Box, Added mb-24 */}
       <motion.section
          id="about"
          className="py-20 md:py-24 mb-24 bg-paper dark:bg-graphite"
@@ -71,7 +70,7 @@ const HomePage = () => {
               </div>
            </div>
 
-           {/* Right: Clean Text & Checklist (No Grey Box) */}
+           {/* Right: Clean Text & Checklist */}
            <div className="space-y-8 pt-8">
               <h3 className="text-3xl font-display font-bold dark:text-neutral-200">{t(homePage.about.titleKey)}</h3>
               <p className="text-lg leading-relaxed text-ink/80 dark:text-neutral-400 font-light">
@@ -91,24 +90,20 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* --- MODULES GRID --- */}
-      <ModuleGrid />
+      {/* --- MODULES GRID (ID: program) --- */}
+      <div id="program">
+         <ModuleGrid />
+      </div>
 
-      {/* --- AI FEEDBACK --- */}
-      <AIFeedback />
+      {/* --- AI FEEDBACK (ID: ai-feedback) --- */}
+      <div id="ai-feedback">
+         <AIFeedback />
+      </div>
 
-      {/* --- CTA --- */}
+      {/* --- CTA (ID: contact inside component) --- */}
       <CTA />
 
-      <footer className="py-12 px-6 md:px-12 bg-paper dark:bg-graphite border-t border-ink/10 dark:border-white/10">
-         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-60 text-sm font-mono dark:text-neutral-500">
-            <p>{t(homePage.footer.textKey)}</p>
-            <p className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-success rounded-full" />
-                {t(homePage.footer.noteKey)}
-            </p>
-         </div>
-      </footer>
+      <Footer />
 
     </div>
   );

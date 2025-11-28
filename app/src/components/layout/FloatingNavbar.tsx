@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { Menu, Sun, Moon, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function FloatingNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,12 +20,16 @@ export default function FloatingNavbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleLanguage = () => {
+    setLanguage(language === 'ru' ? 'en' : 'ru');
+  };
+
   return (
     <>
       <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <div className={`
           pointer-events-auto
-          max-w-2xl w-full mx-auto
+          max-w-3xl w-full mx-auto
           bg-black/80 backdrop-blur-md text-white
           rounded-full px-8 py-4
           flex justify-between items-center
@@ -33,10 +42,36 @@ export default function FloatingNavbar() {
            </Link>
 
            {/* Desktop Links */}
-           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+           <div className="hidden md:flex items-center gap-6 text-sm font-medium">
               <a href="#about" className="hover:text-[#FF4500] transition-colors">О семинаре</a>
               <a href="#program" className="hover:text-[#FF4500] transition-colors">Программа</a>
-              <a href="#ai-feedback" className="hover:text-[#FF4500] transition-colors">AI Feedback</a>
+              <a href="#ai-feedback" className="hover:text-[#FF4500] transition-colors">AI</a>
+           </div>
+
+           {/* Actions: Theme, Lang, CTA */}
+           <div className="hidden md:flex items-center gap-4">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 hover:text-[#FF4500] transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1 text-xs font-mono uppercase hover:text-[#FF4500] transition-colors w-8"
+                aria-label="Toggle language"
+              >
+                {language}
+              </button>
+
+              {/* CTA Button (Small) */}
+              <a href="#contact" className="bg-white text-black px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-[#FF4500] hover:text-white transition-colors">
+                 Связаться
+              </a>
            </div>
 
            {/* Mobile Menu Toggle */}
@@ -46,13 +81,6 @@ export default function FloatingNavbar() {
            >
              <Menu size={24} />
            </button>
-
-           {/* CTA Button (Small) */}
-           <div className="hidden md:block">
-             <a href="#contact" className="bg-white text-black px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-[#FF4500] hover:text-white transition-colors">
-               Связаться
-             </a>
-           </div>
         </div>
       </nav>
 
@@ -69,7 +97,17 @@ export default function FloatingNavbar() {
                 <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>О семинаре</a>
                 <a href="#program" onClick={() => setIsMobileMenuOpen(false)}>Программа</a>
                 <a href="#ai-feedback" onClick={() => setIsMobileMenuOpen(false)}>AI Feedback</a>
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#FF4500]">Связаться</a>
+
+                <div className="flex justify-center gap-8 mt-8">
+                   <button onClick={toggleTheme} className="flex items-center gap-2 text-sm uppercase">
+                      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />} Theme
+                   </button>
+                   <button onClick={toggleLanguage} className="flex items-center gap-2 text-sm uppercase">
+                      <Globe size={20} /> {language}
+                   </button>
+                </div>
+
+                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#FF4500] mt-4">Связаться</a>
 
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
