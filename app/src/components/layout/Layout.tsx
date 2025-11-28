@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
-import Header from './Header';
+// import Header from './Header'; // OLD HEADER
+import FloatingNavbar from './FloatingNavbar'; // NEW NAVBAR
 import SectionsStrip from './SectionsStrip';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -34,7 +35,7 @@ const Layout = ({ children, withSectionsStrip = false }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-paper dark:bg-graphite text-ink dark:text-ash transition-colors duration-300">
-      <Header />
+      <FloatingNavbar />
       {withSectionsStrip ? <SectionsStrip /> : null}
       <main className="relative z-10">{children}</main>
     </div>
