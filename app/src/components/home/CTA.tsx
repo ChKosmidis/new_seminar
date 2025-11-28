@@ -1,6 +1,6 @@
 export default function CTA() {
   return (
-    <section className="w-full bg-[#FF4500] py-32 px-6 text-center mt-24">
+    <section id="contact" className="w-full bg-[#FF4500] py-32 px-6 text-center mt-24">
       {/* ENSURED: flex-col, items-center, justify-center, text-center */}
       <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-12 text-center">
         <h2 className="text-4xl md:text-7xl font-bold text-white tracking-tighter leading-[0.9] uppercase mx-auto">
