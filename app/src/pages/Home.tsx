@@ -8,6 +8,7 @@ import ModuleGrid from '../components/grid/ModuleGrid';
 import AIFeedback from '../components/ai/AIFeedback';
 import CTA from '../components/home/CTA';
 import Footer from '../components/layout/Footer';
+import ScrollRevealText from '../components/ui/ScrollRevealText';
 
 // Icons
 import { CheckCircle2 } from 'lucide-react';
@@ -53,9 +54,15 @@ const HomePage = () => {
                 <span className="font-mono text-orange uppercase tracking-widest text-sm mb-4 block">
                     {t(homePage.statsSection.eyebrowKey)}
                 </span>
-                <h2 className="text-5xl md:text-6xl font-display font-bold leading-tight mb-8">
-                    {t(homePage.statsSection.titleKey)}
-                </h2>
+                
+                <ScrollRevealText
+                  text={t(homePage.statsSection.titleKey)}
+                  as="h2"
+                  enablePaint={true}
+                  paintSize={300}
+                  className="text-5xl md:text-6xl font-display font-bold leading-tight mb-8"
+                />
+
                 <div className="grid grid-cols-2 gap-x-8 gap-y-12">
                    {homePage.stats.map((stat, idx) => (
                       <div

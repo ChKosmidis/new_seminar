@@ -1,173 +1,166 @@
-import { motion, type Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { ArrowRight, Globe } from "lucide-react";
+import { useRef } from "react";
+import { useTranslation } from "../../hooks/useTranslation";
+import { homePage } from "../../data/pages/home";
+import ScrollRevealText from "../ui/ScrollRevealText";
 
-// --- StaggeredText Component ---
-const letterContainer: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.03, // Fast stagger for letters
-      delayChildren: 0.2
-    }
-  }
-};
-
-const letterItem: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  show: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1] as any
-    }
-  }
-};
-
-const StaggeredText = ({ text, className = "" }: { text: string; className?: string }) => {
-  // Split by words first to handle line breaks if needed, but for strict "letter" animation
-  // we can split the whole string. We need to preserve spaces.
-  const letters = Array.from(text);
-
-  return (
-    <motion.span
-      variants={letterContainer}
-      initial="hidden"
-      animate="show"
-      className={`inline-block ${className}`}
-    >
-      {letters.map((char, i) => (
-        <motion.span key={i} variants={letterItem} className="inline-block whitespace-pre">
-          {char}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-};
-
-// --- Typewriter Effect ---
-const TypewriterEffect = ({ text, speed = 50 }: { text: string; speed?: number }) => {
-  const [displayedText, setDisplayedText] = useState("");
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText((prev) => prev + text.charAt(index));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed]);
-
-  return <span>{displayedText}</span>;
-};
-
-// --- Main Component ---
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.3 }
-  }
-};
-
-const item: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  show: {
+// Slide up for block elements
+const fadeInUp: Variants = {
+  hidden: { y: 40, opacity: 0 },
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as any
-    }
-  }
+      ease: [0.22, 1, 0.36, 1], // Custom easing (Swiss-like smooth)
+    },
+  },
 };
 
 export default function HomeHero() {
+  const { t, language } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
+  
+  // Parallax effect for the background/graphic elements based on scroll
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const yBackground = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section id="hero" className="relative pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[85vh] flex items-center">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-start">
+    <section 
+      ref={containerRef} 
+      id="hero" 
+      className="relative min-h-[90vh] flex flex-col justify-center bg-paper dark:bg-graphite overflow-hidden pt-20"
+    >
+      {/* Grid Background (Swiss Style) */}
+      <motion.div 
+        style={{ y: yBackground }}
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-0"
+      >
+         <div className="w-full h-full grid grid-cols-12 gap-4 px-6 md:px-12">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="h-full border-x border-ink dark:border-ash" />
+            ))}
+         </div>
+      </motion.div>
 
-        {/* LEFT COLUMN: Typography (Span 8) */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="lg:col-span-8 flex flex-col gap-8"
-        >
-          {/* Animated Header */}
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[0.9] text-[#111] dark:text-white uppercase break-words">
-            <div className="block"><StaggeredText text="Трёхчасовой" /></div>
-            <div className="block"><StaggeredText text="практикум по" /></div>
-            <div className="block"><StaggeredText text="управлению НКО" /></div>
-          </h1>
+      <div className="container max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-8 items-end">
+          
+          {/* LEFT: Typography (Span 9) */}
+          <div className="lg:col-span-9">
+            
+            {/* Badge / Eyebrow */}
+            <motion.div 
+              key={`badge-${language}`}
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true }} 
+              variants={fadeInUp}
+              className="mb-8 flex items-center gap-3"
+            >
+               <span className="inline-block w-3 h-3 bg-orange rounded-full animate-pulse" />
+               <span className="font-mono text-sm tracking-[0.2em] uppercase text-ink/60 dark:text-ash/60">
+                 {t(homePage.hero.badgeKey)}
+               </span>
+            </motion.div>
 
-          <motion.p
-            variants={item}
-            className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed"
-          >
-            Два ведущих помогают командам НКО за 3 часа отработать ключевые управленческие задачи.
-          </motion.p>
-
-          {/* BUTTONS: Distinct spacing */}
-          <motion.div variants={item} className="flex flex-wrap items-center gap-6 mt-6">
-            <button className="bg-[#FF4500] text-white px-8 py-4 text-sm font-mono uppercase tracking-widest hover:bg-black transition-colors rounded-none">
-              Начать обучение
-            </button>
-            <button className="group flex items-center gap-2 border-b border-gray-400 pb-1 text-sm font-mono uppercase tracking-widest hover:text-[#FF4500] hover:border-[#FF4500] transition-colors">
-              Посмотреть программу
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
-        </motion.div>
-
-        {/* RIGHT COLUMN: AI Terminal Visual (Span 4) */}
-        <div className="lg:col-span-4 hidden lg:block h-full min-h-[400px]">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-[#111] text-[#00FF00] p-8 h-full font-mono text-sm shadow-2xl border-l-4 border-[#FF4500] flex flex-col"
-          >
-            <div className="opacity-50 border-b border-gray-800 pb-4 mb-4">SYSTEM_STATUS: ONLINE</div>
-            <div className="flex-1 space-y-2">
-               <div className="flex gap-2">
-                 <span>&gt;</span>
-                 <TypewriterEffect text="[Initializing protocols]..." speed={30} />
-               </div>
-               <motion.div
-                 initial={{ opacity: 0 }}
-                 animate={{ opacity: 1 }}
-                 transition={{ delay: 1.5 }}
-                 className="text-white"
-               >
-                 &gt; Module Check: <span className="text-green-500">OK</span>
-               </motion.div>
-               <motion.div
-                 initial={{ opacity: 0 }}
-                 animate={{ opacity: 1 }}
-                 transition={{ delay: 2.0 }}
-                 className="text-white"
-               >
-                  &gt; Risk Assessment: <span className="text-[#FF4500]">HIGH</span>
-               </motion.div>
-               <motion.div
-                 initial={{ opacity: 0 }}
-                 animate={{ opacity: 1 }}
-                 transition={{ delay: 2.5 }}
-                 className="pt-4"
-               >
-                 &gt; Optimizing workflows...<span className="animate-pulse">_</span>
-               </motion.div>
+            {/* Main Title with Paint Effect */}
+            <div className="mb-8">
+              <ScrollRevealText 
+                key={`title-${language}`}
+                text={t(homePage.hero.titleKey)}
+                as="h1"
+                enablePaint={true}
+                paintSize={350} // Larger aura for Hero
+                className="text-6xl md:text-8xl lg:text-[7rem] font-bold leading-[0.9] tracking-tighter text-ink dark:text-ash"
+              />
             </div>
-          </motion.div>
-        </div>
 
+            {/* Subtitle / Description */}
+            <motion.div 
+               key={`subtitle-${language}`}
+               variants={fadeInUp}
+               initial="hidden"
+               whileInView="visible"
+               viewport={{ once: true }}
+               transition={{ delay: 0.4 }}
+               className="max-w-2xl"
+            >
+              <h2 className="text-xl md:text-2xl font-light leading-relaxed text-ink/80 dark:text-ash/80">
+                {t(homePage.hero.subtitleKey)}
+              </h2>
+            </motion.div>
+            
+            {/* Buttons */}
+            <motion.div 
+               key={`buttons-${language}`}
+               variants={fadeInUp}
+               initial="hidden"
+               whileInView="visible"
+               viewport={{ once: true }}
+               transition={{ delay: 0.6 }}
+               className="flex flex-wrap items-center gap-6 mt-12"
+            >
+               <a 
+                 href={homePage.hero.primaryCta.href} 
+                 className="bg-orange text-white dark:text-graphite px-10 py-5 text-sm font-bold uppercase tracking-widest hover:bg-ink dark:hover:bg-white dark:hover:text-graphite transition-all duration-300 flex items-center gap-3"
+               >
+                 {t(homePage.hero.primaryCta.labelKey)}
+                 <ArrowRight className="w-4 h-4" />
+               </a>
+               
+               <a 
+                 href={homePage.hero.secondaryCta.href}
+                 className="group relative flex items-center gap-2 px-4 py-2 text-sm font-bold uppercase tracking-widest text-ink dark:text-ash hover:text-orange dark:hover:text-orange transition-colors"
+               >
+                 {t(homePage.hero.secondaryCta.labelKey)}
+                 {/* Animated Underline */}
+                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full" />
+               </a>
+            </motion.div>
+
+          </div>
+
+          {/* RIGHT: Abstract Visual / Stats (Span 3) */}
+          <div className="lg:col-span-3 flex flex-col justify-end h-full pb-2">
+             <motion.div
+                key={`stats-${language}`}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                className="border-t-2 border-orange pt-6"
+             >
+                <div className="font-mono text-xs uppercase tracking-widest text-ink/50 dark:text-ash/50 mb-2">
+                   {t(homePage.hero.floating.labelKey)}
+                </div>
+                <div className="text-4xl font-bold text-ink dark:text-ash">
+                   {t(homePage.hero.floating.valueKey)}
+                </div>
+                <div className="mt-8 flex items-center gap-2 text-xs font-mono text-ink/40 dark:text-ash/40">
+                   <Globe className="w-4 h-4" />
+                   <span>{language === 'ru' ? 'Moscow, RU' : 'International'}</span>
+                </div>
+             </motion.div>
+          </div>
+          
+        </div>
+      </div>
+
+      {/* Decorative Bottom Bar */}
+      <div className="absolute bottom-0 left-0 w-full h-2 bg-ink/5 dark:bg-ash/5 flex">
+         <motion.div 
+           className="h-full bg-orange" 
+           style={{ width: "30%" }} 
+           initial={{ width: "0%" }}
+           whileInView={{ width: "30%" }}
+           transition={{ duration: 1.5, ease: "circOut" }}
+         />
       </div>
     </section>
   );

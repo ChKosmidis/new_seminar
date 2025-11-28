@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import ScrollRevealText from '../ui/ScrollRevealText';
+import { useTranslation } from '../../hooks/useTranslation';
+import { homePage } from '../../data/pages/home';
 
 export default function AIFeedback() {
   const [displayedText, setDisplayedText] = useState('');
+  const { t } = useTranslation();
 
   // Hardcoded messages to replicate the "AI" feel without external props
   const messages = [
@@ -56,8 +60,16 @@ export default function AIFeedback() {
       <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16">
          {/* Left Text */}
          <div>
-            <h2 className="text-5xl font-bold mb-6">Обратная связь AI</h2>
-            <p className="text-xl opacity-70">AI-партнёр фиксирует ключевые цитаты...</p>
+            <div className="mb-6">
+              <ScrollRevealText 
+                text={t(homePage.feedback.titleKey)}
+                as="h2"
+                enablePaint={true}
+                paintSize={300}
+                className="text-5xl font-bold"
+              />
+            </div>
+            <p className="text-xl opacity-70">{t(homePage.feedback.textKey)}</p>
          </div>
 
          {/* Right Terminal (Always Dark) */}
