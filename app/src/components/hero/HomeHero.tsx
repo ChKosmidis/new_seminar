@@ -1,82 +1,56 @@
-import { motion } from 'framer-motion';
-import { useTranslation } from '../../hooks/useTranslation';
-import GhostButton from '../ui/GhostButton';
-import { Link } from 'react-router-dom';
-import { CheckCircle2 } from 'lucide-react';
-import type { TranslationKey } from '../../data/i18n/types';
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-interface HeroProps {
-  data: {
-    badgeKey: TranslationKey;
-    titleKey: TranslationKey;
-    subtitleKey: TranslationKey;
-    primaryCta: { href: string; labelKey: TranslationKey };
-    secondaryCta: { href: string; labelKey: TranslationKey };
-    noteKey: TranslationKey;
-    floating: {
-        labelKey: TranslationKey;
-        valueKey: TranslationKey;
-    };
-  };
-}
-
-const HomeHero = ({ data }: HeroProps) => {
-  const { t } = useTranslation();
-
+export default function HomeHero() {
   return (
-    <motion.section
-       initial={{ opacity: 0, y: 20 }}
-       whileInView={{ opacity: 1, y: 0 }}
-       viewport={{ once: true, margin: "-100px" }}
-       transition={{ duration: 0.8 }}
-       className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden"
-    >
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 w-full relative z-10 flex flex-col items-center text-center">
+    <section className="relative pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[85vh] flex items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-start">
 
-          {/* Badge */}
-          <div className="mb-8 md:mb-12">
-             <div className="inline-flex items-center gap-3 border border-ink/10 dark:border-white/10 rounded-none px-4 py-2 bg-white/50 dark:bg-white/5 backdrop-blur-sm">
-               <span className="w-2 h-2 bg-success animate-pulse" />
-               <span className="text-sm font-mono uppercase tracking-widest text-ink/60 dark:text-neutral-400">
-                 {t(data.badgeKey)}
-               </span>
-             </div>
+        {/* LEFT COLUMN: Typography (Span 8) */}
+        <div className="lg:col-span-8 flex flex-col gap-8">
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-6xl md:text-8xl font-bold tracking-tight leading-[0.9] text-[#111] dark:text-white uppercase break-words"
+          >
+            Трёхчасовой<br />практикум по<br />управлению НКО
+          </motion.h1>
+
+          <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
+            Два ведущих помогают командам НКО за 3 часа отработать ключевые управленческие задачи.
+          </p>
+
+          {/* BUTTONS: Distinct spacing */}
+          <div className="flex flex-wrap items-center gap-6 mt-6">
+            <button className="bg-[#FF4500] text-white px-8 py-4 text-sm font-mono uppercase tracking-widest hover:bg-black transition-colors rounded-none">
+              Начать обучение
+            </button>
+            <button className="group flex items-center gap-2 border-b border-gray-400 pb-1 text-sm font-mono uppercase tracking-widest hover:text-[#FF4500] hover:border-[#FF4500] transition-colors">
+              Посмотреть программу
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
           </div>
+        </div>
 
-          {/* Typography: Massive Headers (Swiss Style) - CENTERED */}
-          <div className="flex flex-col gap-y-12 max-w-5xl mx-auto mb-12">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight text-ink dark:text-neutral-200 break-words">
-               {t(data.titleKey)}
-            </h1>
-
-            <p className="text-xl md:text-2xl text-ink/70 dark:text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
-              {t(data.subtitleKey)}
+        {/* RIGHT COLUMN: AI Terminal Visual (Span 4) */}
+        <div className="lg:col-span-4 hidden lg:block mt-4">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-[#111] text-[#00FF00] p-6 font-mono text-xs shadow-2xl border-l-4 border-[#FF4500]"
+          >
+            <div className="opacity-50 mb-4 border-b border-gray-800 pb-2">AI_FEEDBACK_LOOP // ACTIVE</div>
+            <p className="mb-2">[ANALYZING TEAM PATTERNS]...</p>
+            <p className="text-white">
+              &gt; Risk Assessment: <span className="text-[#FF4500]">HIGH</span><br/>
+              &gt; Optimizing workflows...<br/>
+              &gt; <span className="animate-pulse">_</span>
             </p>
-          </div>
-
-          {/* Actions - CENTERED */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Link to={data.primaryCta.href}>
-              <GhostButton className="bg-ink text-paper dark:bg-white dark:text-graphite hover:bg-orange dark:hover:bg-orange hover:text-white dark:hover:text-white w-full md:w-auto text-lg px-10 py-5">
-                {t(data.primaryCta.labelKey)}
-              </GhostButton>
-            </Link>
-            <a href={data.secondaryCta.href}>
-              <GhostButton className="w-full md:w-auto text-lg px-10 py-5 dark:text-neutral-300 dark:border-neutral-700 dark:hover:border-neutral-500">
-                {t(data.secondaryCta.labelKey)}
-              </GhostButton>
-            </a>
-          </div>
-
-          {/* Note */}
-          <div className="flex items-center gap-2 text-sm font-mono text-ink/40 dark:text-neutral-500">
-            <CheckCircle2 className="w-4 h-4 text-orange" />
-            {t(data.noteKey)}
-          </div>
+          </motion.div>
+        </div>
 
       </div>
-    </motion.section>
+    </section>
   );
-};
-
-export default HomeHero;
+}
